@@ -1,0 +1,64 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Report</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'hangmanGame/gameReportStyle.css'%}">
+</head>
+
+<body>
+    <div class="top_slide">
+        <a href="{%url 'gameMode'%}"><button >Home <i class="glyphicon glyphicon-home"></i></button></a>
+        {% if user.is_authenticated %}
+            <button>{{ user.username }} <i class="glyphicon glyphicon-user"> </i></button>
+        {% else %}
+            <button>User not logged in <i class="glyphicon glyphicon-user"> </i></button>
+        {% endif %}
+        <a href="{% url 'logout'%}"><button>Logout <i class="glyphicon glyphicon-off"></i></button></a>
+    </div>
+
+    <div class="header">
+        <div class="main-heading"><h1><strong>Game Report Card</strong></h1></div>
+            {% comment %} <hr style="height:2px;background-color:red"> {% endcomment %}
+            <div class="username">
+                {% if user.is_authenticated %}
+                    <h1 class="my-1-text-center"><strong>{{ user.username }}'s progress report is here</strong></h1> 
+                {% else %}
+                    <h1>User not logged in </h1>
+                {% endif %}
+            </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="sub-header">
+            <h2>Scorecard</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                    <th scope="col">Word</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Mode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {% for game in games %}                 
+                            <tr>  
+                                {% if game.status != "IN_PROGRESS"%}
+                                    <td class="words">{{game.answer}}</td> 
+                                    <td class="words">{{game.status}}</td>
+                                    <td class="words" >{{game.mode}}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

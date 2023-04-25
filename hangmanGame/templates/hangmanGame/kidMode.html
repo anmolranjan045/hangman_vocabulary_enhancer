@@ -1,0 +1,102 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'hangmanGame/kidModeStyle.css'%}">
+    <title>Kid Mode</title>
+
+</head>
+<body>
+    <div class="top_slide">
+        <a href="{%url 'gameMode'%}"><button >Home <i class="glyphicon glyphicon-home"></i></button></a>
+        <a href="{% url 'gameReport'%}"><button>Game Report <i class="glyphicon glyphicon-file"></i></button>
+        {% if user.is_authenticated %}
+            <button>{{ user.username }} <i class="glyphicon glyphicon-user"> </i></button>
+        {% else %}
+            <button>User not logged in <i class="glyphicon glyphicon-user"> </i></button>
+        {% endif %}
+        <a href="{% url 'logout'%}"><button>Logout <i class="glyphicon glyphicon-off"></i></button></a>
+    </div>
+
+    <h1>The Hangman Kid Mode</h1>
+    
+    <div class="image">
+        <img src="{{ game.image }}">
+    </div>
+
+        {% if game.display %}
+        <h1 id="display"> {{ game.display }}</h1>
+        {% endif %}
+    {%if game.status == "IN_PROGRESS"%}
+    <form action="{%url 'button_kid'%}" id="letters" method="POST">
+
+        <div>
+            <input type="hidden" name="game_id" value="{{ game.game_id }}"/>
+            <button class="btn btn-default" type="submit" name="letter" value="a">A</button>
+            <button class="btn btn-default" type="submit" name="letter" value="b">B</button>
+            <button class="btn btn-default" type="submit" name="letter" value="c">C</button>
+            <button class="btn btn-default" type="submit" name="letter" value="d">D</button>
+            <button class="btn btn-default" type="submit" name="letter" value="e">E</button>
+            <button class="btn btn-default" type="submit" name="letter" value="f">F</button>
+            <button class="btn btn-default" type="submit" name="letter" value="g">G</button>
+            <button class="btn btn-default" type="submit" name="letter" value="h">H</button>
+            <button class="btn btn-default" type="submit" name="letter" value="i">I</button>
+            <button class="btn btn-default" type="submit" name="letter" value="j">J</button>
+            <button class="btn btn-default" type="submit" name="letter" value="k">K</button>
+            <button class="btn btn-default" type="submit" name="letter" value="l">L</button>
+            <button class="btn btn-default" type="submit" name="letter" value="m">M</button>
+        </div>
+        <br>
+
+        <div>
+            <button class="btn btn-default" type="submit" name="letter" value="n">N</button>
+            <button class="btn btn-default" type="submit" name="letter" value="o">O</button>
+            <button class="btn btn-default" type="submit" name="letter" value="p">P</button>
+            <button class="btn btn-default" type="submit" name="letter" value="q">Q</button>
+            <button class="btn btn-default" type="submit" name="letter" value="r">R</button>
+            <button class="btn btn-default" type="submit" name="letter" value="s">S</button>
+            <button class="btn btn-default" type="submit" name="letter" value="t">T</button>
+            <button class="btn btn-default" type="submit" name="letter" value="u">U</button>
+            <button class="btn btn-default" type="submit" name="letter" value="v">V</button>
+            <button class="btn btn-default" type="submit" name="letter" value="w">W</button>
+            <button class="btn btn-default" type="submit" name="letter" value="x">X</button>
+            <button class="btn btn-default" type="submit" name="letter" value="y">Y</button>
+            <button class="btn btn-default" type="submit" name="letter" value="z">Z</button>
+        </div>
+        {% csrf_token %}
+        <br>
+        <div id="guessed">
+            <h style="font-size: 2em"> <strong>Guessed letter: </strong></h>
+            {% for letter in guessed %}
+                <h style="font-size: 2em"> <strong>{{ letter }}</strong></h>
+            {% endfor %}
+        </div>
+    {%endif%}
+
+    {% if game.status == 'win' %}
+        <div class="col-md-3"></div>
+        <div class="alert alert-success col-md-6" id="result">
+            <strong>You win!</strong> The answer is <strong>"{{ game.answer }}"</strong><br>
+            <strong>Meaning: </strong> {{word_mean.meaning}} 
+            <a href="{%url 'kidMode'%}"><button type="button" class="btn btn-primary btn-lg btn-block">New Game</button></a>
+        </div>
+        <div class="col-md-3"></div>
+    
+    {% elif game.status == 'lose' %}
+        <div class="col-md-3"></div>
+        <div class="alert alert-danger col-md-6" id="result">
+            <strong>You lose!</strong> The answer is <strong>"{{ game.answer }}"</strong><br>
+            <strong>Meaning: </strong> {{word_mean.meaning}} 
+            <a href="{%url 'kidMode'%}"><button type="button" class="btn btn-primary btn-lg btn-block">New Game</button></a>
+        </div>
+        <div class="col-md-3"></div>
+        
+    {% endif %}
+</form>
+
+</body>
+</html>

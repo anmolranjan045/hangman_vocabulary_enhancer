@@ -1,0 +1,105 @@
+left {
+    text-align: left;
+    font-size: 18px;
+    align-content: last baseline;
+}
+
+.left {
+    float: left;
+    font-size: 25px;
+    font-style: italic;
+}
+
+.right {
+    float: right;
+    font-size: 25px;
+    font-style: italic;
+}
+
+.top_slide {
+    width: 100%;
+    height: 500%;
+    margin: auto;
+    font-size: 125%;
+    color: blue;
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 20px;
+    /* border-bottom: 5px solid red; */
+}
+
+right {
+    text-align: right;
+    font-size: 18px;
+}
+
+.container {
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-image: url(Images/ModeChoice.jpg);
+    background-repeat: no-repeat;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.player-btn {
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.sub-heading {
+    text-align: center;
+    color: red;
+    font-size: 48px;
+    font-weight: bold;
+    width: fit-content;
+    padding-left: 350px;
+    border-right: 3px solid blue;
+    animation: typing 2s steps(30), blinking-cursor .5s step-end infinite alternate-reverse;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 70%
+    }
+}
+
+@keyframes blinking-cursor {
+    from,
+    to {
+        border-color: transparent
+    }
+    50% {
+        border-color: pink;
+    }
+}
+
+.player-img {
+    align-self: center;
+    width: 425px;
+    height: 425px;
+    border-radius: 1000%;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+.player-img.selected {
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 255, 0.5);
+}
+
+#player-desc {
+    font-size: 20px;
+    margin-top: 20px;
+    color: red;
+}

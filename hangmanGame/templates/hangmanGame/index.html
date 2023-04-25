@@ -1,0 +1,33 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'hangmanGame/mainStyle.css'%}">
+    <title>Hangman Vocabulary Enhancer</title>
+
+</head>
+<body>
+    <br><br><br><br><br><br><br><br><br>
+    <header>
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-12 text-center">
+                    <h1 class="heading">The Hangman Game</h1>
+                    <p class="sub-heading">Can you guess the WORD?<br></p>
+                    <p class="link"><a href="{% url 'login'%}">Click to continue</a></p>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+<br>   
+<footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <bold><p>Copyright &copy; Hangman Vocabulary Enhancer</p></bold>
+      <bold><p>Anuj Bansal, Abhishek Kumar, Anirudh Sharma, Jiya Mehta, Anmol Ranjan</p></bold>
+    </div>
+</footer>
+</html>

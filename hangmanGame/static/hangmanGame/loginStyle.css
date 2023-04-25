@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  background-image: url(Images/LoginPG_BG.jpg);
+}
+::selection{
+  color: #fff;
+  background: #3853bf;
+}
+.wrapper{
+  width: 380px;
+  padding: 40px 30px 50px 30px;
+  background: #fff;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 10px 10px 15px rgba(0,0,0,0.1);
+}
+.wrapper header{
+  font-size: 35px;
+  font-weight: 600;
+}
+.wrapper form{
+  margin: 40px 0;
+}
+form .field{
+  width: 100%;
+  margin-bottom: 20px;
+}
+form .field.shake{
+  animation: shake 0.3s ease-in-out;
+}
+@keyframes shake {
+  0%, 100%{
+    margin-left: 0px;
+  }
+  20%, 80%{
+    margin-left: -12px;
+  }
+  40%, 60%{
+    margin-left: 12px;
+  }
+}
+form .field .input-area{
+  height: 50px;
+  width: 100%;
+  position: relative;
+}
+form input{
+  width: 100%;
+  height: 100%;
+  outline: none;
+  padding: 0 45px;
+  font-size: 18px;
+  background: none;
+  caret-color: #5372F0;
+  border-radius: 5px;
+  border: 1px solid #bfbfbf;
+  border-bottom-width: 2px;
+  transition: all 0.2s ease;
+}
+form .field input:focus,
+form .field.valid input{
+  border-color: #5372F0;
+}
+form .field.shake input,
+form .field.error input{
+  border-color: #dc3545;
+}
+.field .input-area i{
+  position: absolute;
+  top: 50%;
+  font-size: 18px;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+.input-area .icon{
+  left: 15px;
+  color: #bfbfbf;
+  transition: color 0.2s ease;
+}
+.input-area .error-icon{
+  right: 15px;
+  color: #dc3545;
+}
+form input:focus ~ .icon,
+form .field.valid .icon{
+  color: #5372F0;
+}
+form .field.shake input:focus ~ .icon,
+form .field.error input:focus ~ .icon{
+  color: #bfbfbf;
+}
+form input::placeholder{
+  color: #bfbfbf;
+  font-size: 17px;
+}
+form .field .error-txt{
+  color: #dc3545;
+  text-align: left;
+  margin-top: 5px;
+}
+form .field .error{
+  display: none;
+}
+form .field.shake .error,
+form .field.error .error{
+  display: block;
+}
+form .pass-txt{
+  text-align: left;
+  margin-top: -10px;
+}
+.wrapper a{
+  color: #5372F0;
+  text-decoration: none;
+}
+.wrapper a:hover{
+  text-decoration: none;
+}
+
+/* .button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+} */
+
+.my-button {
+  display: inline-block;
+  padding: 13px 139px;
+  background-color: #5372F0;
+  border: none;
+  border-radius: 4px;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.my-button:hover {
+  background-color: #0069d9;
+}
+
+form input[type="submit"]{
+  height: 50px;
+  margin-top: 10px;
+  color: #fff;
+  padding: 0;
+  border: none;
+  background: #5372F0;
+  cursor: pointer;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+form input[type="submit"]:hover{
+  background: #2c52ed;
+};
+
+footer{
+  color: red;
+  /* background: #212529; */
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+}

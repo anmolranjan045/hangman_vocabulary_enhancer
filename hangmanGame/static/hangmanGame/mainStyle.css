@@ -1,0 +1,65 @@
+body{
+    background-image: url(Images/MainBG.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+	align-items: center;
+    height: 100%; 
+}
+
+/* .container{
+    padding-top: 10%;
+} */
+
+.heading{
+	width: 70%;
+	height: 100%;
+	margin: auto;
+    font-size: 600%;
+    color: aqua;
+    text-align: center;
+	border-bottom: 2px solid red;
+}
+
+.sub-heading{	
+	font-size: 1.75rem;
+    width: 22ch;
+	color: aqua;
+    animation: typing 2s steps(22), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+	text-align: center;
+	padding-left: 475px;
+}
+
+@keyframes typing {
+    from {
+      width: 0
+    }
+}
+      
+@keyframes blink {
+    50% {
+      border-color: transparent
+    }
+}
+
+.link{
+    text-align: center;
+    color: aqua;
+    font-size: xx-large;
+}
+
+a{
+    color: blue;
+    text-decoration: none;
+}
+
+footer{
+    color: red;
+    /* background: #212529; */
+    font-size: large;
+    text-align: center;
+    font-weight: bold;
+}

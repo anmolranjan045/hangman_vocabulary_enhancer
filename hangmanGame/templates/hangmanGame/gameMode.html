@@ -1,0 +1,79 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'hangmanGame/gameModestyle.css'%}">
+  </head>
+
+  <body>
+    <div class="top_slide">
+        <a href="{%url 'gameReport'%}"><button>Game Report <i class="glyphicon glyphicon-file"></i></button></a>
+        {% if user.is_authenticated %}
+            <button>{{ user.username }} <i class="glyphicon glyphicon-user"> </i></button>
+        {% else %}
+            <button>User not logged in <i class="glyphicon glyphicon-user"> </i></button>
+        {% endif %}
+        <a href="{% url 'logout'%}"><button>Logout <i class="glyphicon glyphicon-off"></i></button></a>
+    </div>
+
+    <div class="container-fluid">
+    <div class="col-12 text-center headings">
+      <h1 class="sub-heading">Select a Gaming Mode</h1>
+    </div>
+
+    <!-- Images for player selection -->
+    <div style="text-align: center;">
+      <div class="container">
+        <a class="player-btn" onclick="showPlayer('player1')">
+        <img class="player-img" src="{% static 'hangmanGame/kidsgame.JPG'%}" alt="Mode 1">
+        </a>
+
+        <a class="player-btn" onclick="showPlayer('player2')">
+        <img class="player-img" src="{% static 'hangmanGame/PROMODE.JPG'%}" alt="Mode 2">
+        </a>
+      </div>
+    </div>
+    <!-- Player description section -->
+    <div id="player-desc">
+      Please select the mode to view their description.
+    </div>
+    <!-- JavaScript code to show player description and highlight selected player -->
+    <script>
+      var selectedPlayer = null;
+      
+      function showPlayer(player) {
+        var link = document.getElementById("myLink");
+        var desc = document.getElementById("player-desc");
+        var playerImg = document.querySelector(".player-img.selected");
+        if (playerImg) {
+          playerImg.classList.remove("selected");
+        }
+        if (player == selectedPlayer) {
+          desc.innerHTML = "Please select a different player.";
+          selectedPlayer = null;
+        } else {
+          if (player == "player1") {
+            desc.innerHTML = "KIDS mode is for the beginners to adapt to the environment .The player will be given 7 lives for guessing each word and there will be no time limit.After the player guesses the word ,the meaning of word will be displayed along with the status of the word.The player has to guess a correct word within the given number of lives.After the end of game ,the final report will be displayed along with the rewards.";
+            
+          } else if (player == "player2") {
+            desc.innerHTML = "PRO mode is the competitive mode for improving your skills .The player will be given 7 lives for guessing each word and there will be time limit of 1min for each word.After the player guesses the word ,the meaning of word will be displayed along with the status of the word.The player has to guess a correct word within the given timespan and the given number of lives.After the end of game ,the final report will be displayed along with the rewards.";
+          } 
+          selectedPlayer = player;
+          document.querySelector("[alt='" + selectedPlayer + "']").classList.add("selected");
+        }
+      }
+    </script>
+    <left>
+        <a href={% url 'kidMode'%} class="left">Click to continue to KIDS mode</a>
+    </left>
+    <right>
+        <a href="{% url 'proMode'%}" class="right">Click to continue to PRO mode</a>
+    </right>
+  </div>
+  </body>
+</html>
