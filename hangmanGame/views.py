@@ -9,7 +9,7 @@ from .models import hangmanWord, hangman_Game
 import random
 
 difficult_kid = 1
-difficult_pro = 3
+difficult_pro = 4
 
 def index(request):
     return render(request, 'hangmanGame/index.html')
@@ -35,7 +35,7 @@ def register_user(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
-            messages.success(request, "Registration successful!!")
+            # messages.success(request, "Registration successful!!")
             login(request, user)
             return redirect('gameMode')
     if request.method == "GET":          
@@ -72,10 +72,11 @@ def gameReport(request):
 
 def changeDifficult(done, difficult):
     if done:
-        if difficult >= 1 and difficult < 5:
-            difficult += 1
-    elif difficult == 5 or difficult >= 1:
+        if difficult > 0 and difficult < 5:
+          difficult += 1
+    elif difficult <= 5 and difficult > 1:
         difficult -= 1
+    return difficult
 
 def get_word(difficult):
     if difficult <= 3:
@@ -98,10 +99,10 @@ def kidMode(request):
         context = {'guessed': [], 'game': game}
         return render(request, 'hangmanGame/kidmode.html', context)
     else:
-        return button_kid(request)
+        return button_kid(request, difficult_kid)
 
 @login_required
-def button_kid(request):
+def button_kid(request, difficult_kid):
     game_id = int(request.POST['game_id'])
     game = hangman_Game.objects.get(game_id=game_id)
     answer = game.answer
@@ -115,6 +116,7 @@ def button_kid(request):
     
     if game.status == 'win' or game.status == 'lose':
         generate_finished_game_kid(game)
+        print(difficult_kid)
         return render(request, "hangmanGame/kidMode.html", {'guessed': guessed, 'game': game, 'word_mean': word_mean})
     
     if cur_guess not in guessed:
@@ -134,6 +136,7 @@ def button_kid(request):
     
     if match_num == len(answer):
         game.status = "win"
+        difficult_kid = changeDifficult(True, difficult_kid)
         game.save()
     game.display = word_to_display
     
@@ -143,6 +146,7 @@ def button_kid(request):
             num_wrong_guess += 1
     if num_wrong_guess >= 7:
         game.status = 'lose'
+        difficult_kid = changeDifficult(False, difficult_kid)
         game.save()
         num_wrong_guess = 7
     game.image = "/static/hangmanGame/Images/hang" + str(num_wrong_guess) + ".png"
@@ -153,14 +157,10 @@ def generate_finished_game_kid(game):
     answer = game.answer
     guessed = list(game.guessed)
     if game.status == 'win':
-        done = True
-        changeDifficult(done, difficult_kid)
         game.display = " ".join(list(answer)) 
         game.image = "/static/hangmanGame/Images/hang" + str(wrong_num(guessed, answer)) + ".png"
         return
     else:
-        done = False
-        changeDifficult(done, difficult_kid)
         game.display = word_to_display(guessed, answer)
         game.image = "/static/hangmanGame/Images/hang7.png"
         return
@@ -196,10 +196,10 @@ def proMode(request):
         context = {'guessed': [], 'game': game}
         return render(request, 'hangmanGame/promode.html', context)
     else:
-        return button_pro(request)
+        return button_pro(request, difficult_pro)
 
 @login_required
-def button_pro(request):
+def button_pro(request, difficult_pro):
     game_id = int(request.POST['game_id'])
     game = hangman_Game.objects.get(game_id=game_id)
     answer = game.answer
@@ -232,6 +232,7 @@ def button_pro(request):
     
     if match_num == len(answer):
         game.status = "win"
+        difficult_pro = changeDifficult(True, difficult_pro)
         game.save()
     game.display = word_to_display
     
@@ -241,6 +242,7 @@ def button_pro(request):
             num_wrong_guess += 1
     if num_wrong_guess >= 7:
         game.status = 'lose'
+        difficult_pro = changeDifficult(False, difficult_pro)
         game.save()
         num_wrong_guess = 7
     game.image = "/static/hangmanGame/Images/hang" + str(num_wrong_guess) + ".png"

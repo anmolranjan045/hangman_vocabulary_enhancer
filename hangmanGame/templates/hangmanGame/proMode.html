@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'hangmanGame/proModeStyle.css'%}">
     <title>Pro Mode</title>
-
 </head>
 <body>
     <div class="top_slide">
@@ -21,9 +20,8 @@
         {% endif %}
         <a href="{% url 'logout'%}"><button>Logout <i class="glyphicon glyphicon-off"></i></button></a>
     </div>
-
-    <h1>The Hangman Pro Mode</h1>
-    
+    <h1>The Hangman Pro Mode</h1> 
+    <div id="app"></div>
     <div class="image">
         <img src="{{ game.image }}">
     </div>
@@ -97,6 +95,6 @@
         
     {% endif %}
 </form>
-
+<script src="{% static 'proscripts.js' %}"></script>
 </body>
 </html>
